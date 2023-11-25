@@ -13,7 +13,7 @@ assert not hasattr(dataframe, '__getattr__')
 
 ## Why would you do this?!
 
-I was having problems with pandas.DataFrame.__getattr__, specifically that it exists at all,
+I was having problems with `pandas.DataFrame.__getattr__`, specifically that it exists at all,
 and could not find a better workaround. Overriding is not an option.
 In the rare case that someone else has the same problem,
 I decided to make this solution available. In exchange please smack that star button.
