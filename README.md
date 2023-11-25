@@ -8,6 +8,8 @@ from remove_inherited_attributes import remove_inherited_attributes
 from pandas import DataFrame
 dataframe = remove_inherited_attributes(DataFrame, '__getattr__')
 assert dataframe is not DataFrame
+assert dataframe.__new__ is DataFrame.__new__
+assert dataframe.__init__ is DataFrame.__init__
 assert not hasattr(dataframe, '__getattr__')
 ```
 
