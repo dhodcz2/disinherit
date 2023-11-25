@@ -1,6 +1,6 @@
 ## Removing Inherited Attributes
 
-This solution involves copying (and cacheing) tHe MRO of the class,
+This solution involves copying (and caching) the MRO of the class,
 removing the attributes from each of the copies, and then reassembling the class.
 
 ```
@@ -24,5 +24,6 @@ I'm not allowed in the PyPI clubhouse yet, so you'll have to install from source
 
 ```
 git clone git@github.com:dhodcz2/remove_inherited_attributes.git
+python -m pip install ./remove_inherited_attributes
 ```
 
