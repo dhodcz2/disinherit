@@ -20,6 +20,32 @@ and could not find a better workaround. Overriding is not an option.
 In the rare case that someone else has the same problem,
 I decided to make this solution available. In exchange please smack that star button.
 
+## Are you sure?
+
+```
+from pandas import DataFrame
+
+
+class Test(DataFrame):
+    @property
+    def foo(self):
+        print('foo')
+        raise AttributeError
+
+test = Test()
+test.foo
+```
+
+```
+foo
+foo
+Traceback (most recent call last):
+  ...
+AttributeError
+```
+
+Here you can see that foo is printed twice. This is troublesome for the library that I am working on.
+
 ## Installation
 
 I'm not allowed in the PyPI clubhouse yet, so you'll have to install from source:
