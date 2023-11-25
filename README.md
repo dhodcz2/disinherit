@@ -64,7 +64,7 @@ Traceback (most recent call last):
     ...
 AttributeError
 ```
-Now because `__getattr__` is not inherited, the AttributeError is not caught, forcing the property to re-run.
+Now because `__getattr__` is not inherited, there is no problematic recursive behavior.
 
 
 ## Installation
