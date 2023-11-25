@@ -25,7 +25,6 @@ I decided to make this solution available. In exchange please smack that star bu
 ```
 from pandas import DataFrame
 
-
 class Test(DataFrame):
     @property
     def foo(self):
