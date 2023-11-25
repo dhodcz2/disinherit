@@ -23,3 +23,6 @@ requires = [
     "wheel",
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["remove_inherited_attributes*"]

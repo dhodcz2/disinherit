@@ -128,13 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-*.png
-*.feather
 src/*.ipynb
 .idea
-**/tileseg/config.py
-src/*.py
-**/inference.py
 
 
 
