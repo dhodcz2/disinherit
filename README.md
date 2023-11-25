@@ -22,7 +22,7 @@ I decided to make this solution available. In exchange please smack that star bu
 
 ## Are you sure?
 
-```
+```python
 from pandas import DataFrame
 
 class Test(DataFrame):
@@ -44,6 +44,28 @@ AttributeError
 ```
 
 Here you can see that foo is printed twice. This is troublesome for the library that I am working on.
+
+```python
+from pandas import DataFrame
+from remove_inherited_attributes import remove_inherited_attributes
+NoGetter = remove_inherited_attributes(DataFrame, '__getattr__')
+class Test(NoGetter):
+    @property
+    def foo(self):
+        print('foo')
+        raise AttributeError
+
+test = Test()
+test.foo
+```
+```
+foo
+Traceback (most recent call last):
+    ...
+AttributeError
+```
+Now because `__getattr__` is not inherited, the AttributeError is not caught, forcing the property to re-run.
+
 
 ## Installation
 
