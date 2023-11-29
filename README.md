@@ -1,12 +1,12 @@
-## Removing Inherited Attributes
+## Disinherit
 
 This solution involves copying (and caching) the MRO of the class,
 removing the attributes from each of the copies, and then reassembling the class.
 
 ```
-from remove_inherited_attributes import remove_inherited_attributes
+from disinherit import disinherit
 from pandas import DataFrame
-dataframe = remove_inherited_attributes(DataFrame, '__getattr__')
+dataframe = disinherit(DataFrame, '__getattr__')
 assert dataframe is not DataFrame
 assert dataframe.__new__ is DataFrame.__new__
 assert dataframe.__init__ is DataFrame.__init__
@@ -47,8 +47,8 @@ Here you can see that foo is printed twice. This is troublesome for the library 
 
 ```python
 from pandas import DataFrame
-from remove_inherited_attributes import remove_inherited_attributes
-NoGetter = remove_inherited_attributes(DataFrame, '__getattr__')
+from disinherit import disinherit
+NoGetter = disinherit(DataFrame, '__getattr__')
 class Test(NoGetter):
     @property
     def foo(self):
@@ -72,7 +72,7 @@ Now because `__getattr__` is not inherited, there is no problematic recursive be
 I'm not allowed in the PyPI clubhouse yet, so you'll have to install from source:
 
 ```
-git clone git@github.com:dhodcz2/remove_inherited_attributes.git
-python -m pip install ./remove_inherited_attributes
+git clone git@github.com:dhodcz2/disinherit.git
+python -m pip install ./disinherit
 ```
 

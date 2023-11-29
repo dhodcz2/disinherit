@@ -33,6 +33,7 @@ class Attrs(frozenset):
         return {}
 
     def disinherit(self, item: Type[T]) -> Type[T]:
+        # backup current modules
         roots = {
             cls.__module__.partition('.')[0]
             for cls in item.mro()
@@ -46,6 +47,7 @@ class Attrs(frozenset):
             )
         }
 
+        # generate new or reuse existing copies
         name_copy = self.name_copy
         for key in backup:
             if key in name_copy:
@@ -56,10 +58,12 @@ class Attrs(frozenset):
         module = import_module(item.__module__)
         result = getattr(module, item.__name__)
 
+        # restore backup
         for key, value in backup.items():
             name_copy[key] = import_module(key)
             sys.modules[key] = value
 
+        # remove attributes
         for cls in result.mro():
             for attr in self:
                 if attr in cls.__dict__:
@@ -78,6 +82,7 @@ def disinherit(
     :return: A copy of the class with the attributes removed
 
     Warning: do not call this function in the same module as the class you are copying.
+    This only supports classes that are imported from another module.
     """
     attrs = Attrs(attrs)
     result = attrs.disinherit(cls)
